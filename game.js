@@ -7,12 +7,16 @@
 
 /******************************************************************************
  *        Name: getComputerChoice
- * Description: Randomly sets choice for computer.
- *   Arguments:
- *     Returns:
+ * Description: Randomly sets choice for computer using a random number
+ *              generator.
+ *   Arguments: NONE
+ *     Returns: A string that one of the following: "rock", "paper", 
+ *              or "scissors".
  *****************************************************************************/
 function getComputerChoice (){
     let randomNumber = Math.floor(Math.random() * 3) + 1;
+    /* We assign rock if random value is 1, paper if random value is 2, and 
+       scissors when random value is 3 */
     if(randomNumber === 1) {
         return "rock";
     }
@@ -25,13 +29,13 @@ function getComputerChoice (){
 }
 
 
-
 /******************************************************************************
  *        Name: playRound
  * Description: Implements each round for the game.
  *   Arguments: playerSelection - Selection for human player.
  *   Arguments: computerSelection - The selection for the computer. 
- *     Returns:
+ *     Returns: "Tie" if nobody wins, otherwise "computer" or "player" 
+ *              depending on who the current round.
  *****************************************************************************/
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == "rock" && computerSelection == "paper") {
@@ -122,7 +126,7 @@ function game()
     }
 
     //Report results and winner.
-    console.log(`Number of tied games: ${tie}`);
+    alert(`Final Results\nNumber of tied games: ${tie}\nPlayer wins: ${playerWinCount}\nComputer Wins: ${computerWinCount}`);
 }
 
 /******************************************************************************
