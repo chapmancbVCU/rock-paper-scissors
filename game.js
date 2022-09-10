@@ -45,9 +45,11 @@ function playRound(playerSelection, computerSelection) {
  *     Returns: True if valid, otherwise false.
  *****************************************************************************/
 function validateChoice(playerSelection) {
+    let selection = playerSelection.toLowerCase();
+
     // Verify choice and alert user if it is invalid.
-    if(playerSelection === "rock" || playerSelection === "paper" || 
-            playerSelection === "scissors") {
+    if(selection === "rock" || selection === "paper" || 
+            selection === "scissors") {
         return true;
     }
     else {
