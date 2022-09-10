@@ -47,7 +47,7 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerSelection == "scissors" && computerSelection == "paper") {
         return "player";
     } else {
-        return tie;
+        return "tie";
     }
 
 }
@@ -109,9 +109,15 @@ function game()
         let results = playRound(playerSelection, computerSelection);
         console.log(`Results: ${results}`);
 
-        if(results === "tie") {
+        if(results == "computer") {
+            computerWinCount++;
+            alert("Results for this round: Computer wins!");
+        } else if (results == "player") {
+            playerWinCount++;
+            alert("Results for this round: Player wins!");
+        } else {
             tie++;
-            alert("Results for this round: Tie game");
+            alert("Results for this round: Tie game!");
         }      
     }
 
@@ -123,7 +129,6 @@ function game()
  * Main
  *****************************************************************************/
 game();
-console.log(`Number of tied games: ${tie}`);
 
 
 
