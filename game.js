@@ -34,7 +34,10 @@ function getComputerChoice (){
  *     Returns:
  *****************************************************************************/
 function playRound(playerSelection, computerSelection) {
-    
+    if(playerSelection == computerSelection) {
+        return "tie";
+    }
+
 }
 
 
@@ -67,6 +70,9 @@ function validateChoice(playerSelection) {
  *****************************************************************************/
 function game()
 {
+    let tie = 0;
+    let computerWinCount = 0;
+    let playerWinCount = 0;
     // Number of rounds for this game.
     let rounds = 5;
 
@@ -88,14 +94,23 @@ function game()
         let computerSelection = getComputerChoice();
         alert(`Player selection: ${playerSelection}\nComputer selection: ${computerSelection}`);
 
+        let results = playRound(playerSelection, computerSelection);
+        console.log(`Results: ${results}`);
 
+        if(results === "tie") {
+            tie++;
+        }      
     }
+
+    //Report results and winner.
+    console.log(`Number of tied games: ${tie}`);
 }
 
 /******************************************************************************
  * Main
  *****************************************************************************/
 game();
+console.log(`Number of tied games: ${tie}`);
 
 
 
