@@ -99,6 +99,7 @@ function game()
 
         if(results === "tie") {
             tie++;
+            alert("Results for this round: Tie game");
         }      
     }
 
