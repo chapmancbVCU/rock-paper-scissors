@@ -34,8 +34,20 @@ function getComputerChoice (){
  *     Returns:
  *****************************************************************************/
 function playRound(playerSelection, computerSelection) {
-    if(playerSelection == computerSelection) {
-        return "tie";
+    if (playerSelection == "rock" && computerSelection == "paper") {
+        return "computer";
+    } else if (playerSelection == "rock" && computerSelection == "scissors") {
+        return "player";
+    } else if (playerSelection == "paper" && computerSelection == "rock") {
+        return "player"
+    } else if (playerSelection == "paper" && computerSelection == "scissors") {
+        return "computer";
+    } else if (playerSelection == "scissors" && computerSelection == "rock") {
+        return "computer";
+    } else if (playerSelection == "scissors" && computerSelection == "paper") {
+        return "player";
+    } else {
+        return tie;
     }
 
 }
