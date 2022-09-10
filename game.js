@@ -102,7 +102,7 @@ function game()
         // Determine if input is valid in this do while loop.
         do {
             // Ask user to enter a choice for the game.
-            playerSelection = prompt(`Enter rock, paper, or scissors (all lower case) for round ${i + 1}:`, "");
+            playerSelection = prompt(`Enter rock, paper, or scissors for round ${i + 1}:`, "");
             isValidChoice = validateChoice(playerSelection);
         } while (isValidChoice == false);
 
