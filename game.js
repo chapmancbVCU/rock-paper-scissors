@@ -10,7 +10,7 @@
  * Description: Randomly sets choice for computer using a random number
  *              generator.
  *   Arguments: NONE
- *     Returns: A string that one of the following: "rock", "paper", 
+ *     Returns: A string that is one of the following: "rock", "paper", 
  *              or "scissors".
  *****************************************************************************/
 function getComputerChoice (){
@@ -128,6 +128,7 @@ function game()
     //Report results and winner.
     alert(`Final Results\nNumber of tied games: ${tie}\nPlayer wins: ${playerWinCount}\nComputer Wins: ${computerWinCount}`);
 }
+
 
 /******************************************************************************
  * Main
