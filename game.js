@@ -4,7 +4,16 @@
  * Date Created: September 10, 2022
  *  Description: Implementation for Rock Paper Scissors game.
 ******************************************************************************/
-let playerSelection = "";
+
+/******************************************************************************
+ * GLOBAL VARIABLES
+ *****************************************************************************/
+let round = 1;
+let tie = 0;
+let computerWinCount = 0;
+let playerWinCount = 0;
+
+
 /******************************************************************************
  *        Name: getComputerChoice
  * Description: Randomly sets choice for computer using a random number
@@ -39,21 +48,27 @@ function getComputerChoice (){
  *****************************************************************************/
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == "rock" && computerSelection == "paper") {
+        computerWinCount++;
         return "computer";
     } else if (playerSelection == "rock" && computerSelection == "scissors") {
+        playerWinCount++;
         return "player";
     } else if (playerSelection == "paper" && computerSelection == "rock") {
+        playerWinCount++;
         return "player"
     } else if (playerSelection == "paper" && computerSelection == "scissors") {
+        computerWinCount++;
         return "computer";
     } else if (playerSelection == "scissors" && computerSelection == "rock") {
+        computerWinCount++;
         return "computer";
     } else if (playerSelection == "scissors" && computerSelection == "paper") {
+        playerWinCount++;
         return "player";
     } else {
+        tie++;
         return "tie";
     }
-
 }
 
 
@@ -84,13 +99,17 @@ function validateChoice(playerSelection) {
  *   Arguments: NONE
  *     Returns: NONE
  *****************************************************************************/
-function game()
+function game(playerSelection)
 {
-    let tie = 0;
-    let computerWinCount = 0;
-    let playerWinCount = 0;
-
-
+    
+    const computerSelection = getComputerChoice();
+    alert(`Round: ${round}\nPlayer selected: ${playerSelection}\nComputer selected: ${computerSelection}`);
+    results = playRound(playerSelection, computerSelection);
+    alert(`Report for Round ${round}\nPlayer: ${playerWinCount}\nComputer: ${computerWinCount}\nTied games: ${tie}`);
+    
+    
+    // Increment for reporting purposes.
+    round++;
     // Number of rounds for this game.
     //let rounds = 5;
 
@@ -140,12 +159,33 @@ function game()
 // Get info from button click and set value to string playerSelection.
 const buttons = document.getElementById('rps-buttons');
 
+
+const gameResultsContainer = document.querySelector('#gameResults');
+
+// Header message
+const gameResultsHeaderElement = document.createElement('h3');
+gameResultsHeaderElement.classList.add('gameResultsHeaderElement');
+gameResultsHeaderElement.textContent = "Running Game Summary!";
+gameResultsContainer.appendChild(gameResultsHeaderElement);
+
+
 buttons.addEventListener('click', (event) => {
     const isButton = event.target.nodeName === 'BUTTON';
     if(!isButton) {
         return;
     }
 
-    playerSelection = event.target.id;
-    alert(playerSelection);
+    const playerSelection = event.target.id;
+
+    // Play until a player get 5 wins
+    if(playerWinCount < 5 && computerWinCount < 5) {
+        game(playerSelection);
+    } else if (playerWinCount == 5) {
+        alert("Player wins");
+    } else if (computerWinCount == 5) {
+        alert("Computer wins");
+    } else {
+        alert("Refresh to start new game");
+    }
+    
 });
