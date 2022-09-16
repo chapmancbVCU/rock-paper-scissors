@@ -103,6 +103,7 @@ function game(playerSelection)
 {
     
     const computerSelection = getComputerChoice();
+    
     alert(`Round: ${round}\nPlayer selected: ${playerSelection}\nComputer selected: ${computerSelection}`);
     results = playRound(playerSelection, computerSelection);
     alert(`Report for Round ${round}\nPlayer: ${playerWinCount}\nComputer: ${computerWinCount}\nTied games: ${tie}`);
@@ -163,10 +164,19 @@ const buttons = document.getElementById('rps-buttons');
 const gameResultsContainer = document.querySelector('#gameResults');
 
 // Header message
-const gameResultsHeaderElement = document.createElement('h3');
+const gameResultsHeaderElement = document.createElement('h2');
 gameResultsHeaderElement.classList.add('gameResultsHeaderElement');
 gameResultsHeaderElement.textContent = "Running Game Summary!";
 gameResultsContainer.appendChild(gameResultsHeaderElement);
+
+// Display text running score
+const runningScore = document.createElement('h3');
+runningScore.classList.add('runningScore');
+runningScore.textContent = "Running Score";
+gameResultsContainer.appendChild(runningScore);
+
+// Create border below description text.
+gameResultsContainer.appendChild(document.createElement('hr'));
 
 
 buttons.addEventListener('click', (event) => {
