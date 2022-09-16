@@ -167,12 +167,14 @@ const gameResultsContainer = document.querySelector('#gameResults');
 const gameResultsHeaderElement = document.createElement('h2');
 gameResultsHeaderElement.classList.add('gameResultsHeaderElement');
 gameResultsHeaderElement.textContent = "Running Game Summary!";
+gameResultsHeaderElement.style.textAlign = "center";
 gameResultsContainer.appendChild(gameResultsHeaderElement);
 
 // Display text running score
 const runningScore = document.createElement('h3');
 runningScore.classList.add('runningScore');
 runningScore.textContent = "Running Score";
+runningScore.style.textAlign = "center";
 gameResultsContainer.appendChild(runningScore);
 
 // Create border below description text.
