@@ -4,7 +4,7 @@
  * Date Created: September 10, 2022
  *  Description: Implementation for Rock Paper Scissors game.
 ******************************************************************************/
-
+let playerSelection = "";
 /******************************************************************************
  *        Name: getComputerChoice
  * Description: Randomly sets choice for computer using a random number
@@ -89,25 +89,27 @@ function game()
     let tie = 0;
     let computerWinCount = 0;
     let playerWinCount = 0;
+
+
     // Number of rounds for this game.
-    let rounds = 5;
+    //let rounds = 5;
 
     // Main execution loop for the 5 rounds.
-    for(let i = 0; i < rounds; i++) {
+    //for(let i = 0; i < rounds; i++) {
         
         // Boolean flag to break out of loop once valid choice is selected.
-        let isValidChoice = false;
+        //let isValidChoice = false;
 
-        let playerSelection;
+        //let playerSelection;
         // Determine if input is valid in this do while loop.
-        do {
+        /*do {
             // Ask user to enter a choice for the game.
             playerSelection = prompt(`Enter rock, paper, or scissors for round ${i + 1}:`, "");
             isValidChoice = validateChoice(playerSelection);
-        } while (isValidChoice == false);
+        } while (isValidChoice == false);*/
 
         // Once a valid choice is made we alert the user.
-        let computerSelection = getComputerChoice();
+        /*let computerSelection = getComputerChoice();
         alert(`Player selection: ${playerSelection}\nComputer selection: ${computerSelection}`);
 
         let results = playRound(playerSelection, computerSelection);
@@ -122,15 +124,28 @@ function game()
         } else {
             tie++;
             alert("Results for this round: Tie game!");
-        }      
-    }
+        }  */    
+    //}
 
     //Report results and winner.
-    alert(`Final Results\nNumber of tied games: ${tie}\nPlayer wins: ${playerWinCount}\nComputer Wins: ${computerWinCount}`);
+    //alert(`Final Results\nNumber of tied games: ${tie}\nPlayer wins: ${playerWinCount}\nComputer Wins: ${computerWinCount}`);
 }
 
 
 /******************************************************************************
  * Main
  *****************************************************************************/
-game();
+//game();
+
+// Get info from button click and set value to string playerSelection.
+const buttons = document.getElementById('rps-buttons');
+
+buttons.addEventListener('click', (event) => {
+    const isButton = event.target.nodeName === 'BUTTON';
+    if(!isButton) {
+        return;
+    }
+
+    playerSelection = event.target.id;
+    alert(playerSelection);
+});
