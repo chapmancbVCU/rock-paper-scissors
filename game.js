@@ -12,6 +12,7 @@ let round = 1;
 let tie = 0;
 let computerWinCount = 0;
 let playerWinCount = 0;
+let isGameFinished = false;
 
 
 /******************************************************************************
@@ -101,16 +102,69 @@ function validateChoice(playerSelection) {
  *****************************************************************************/
 function game(playerSelection)
 {
-    
     const computerSelection = getComputerChoice();
-    
-    alert(`Round: ${round}\nPlayer selected: ${playerSelection}\nComputer selected: ${computerSelection}`);
+ 
+    // Round selection report
+    const roundMessage = document.createElement('p');
+    roundMessage.classList.add('roundMessage');
+    roundMessage.style.textAlign = "center";
+    roundMessage.textContent = `Round ${round}`;
+
+    const playerSelectionInfo = document.createElement('p');
+    playerSelectionInfo.classList.add('playerSelectionInfo');
+    playerSelectionInfo.textContent = `Player selected: ${playerSelection}`;
+
+    const computerSelectionInfo = document.createElement('p');
+    computerSelectionInfo.classList.add('computerSelectionInfo');
+    computerSelectionInfo.textContent = `Computer selected: ${computerSelection}`;
+
+    gameResultsContainer.appendChild(roundMessage);
+    gameResultsContainer.appendChild(playerSelectionInfo);
+    gameResultsContainer.appendChild(computerSelectionInfo);
+
+    // Complete round and get results.
     results = playRound(playerSelection, computerSelection);
-    alert(`Report for Round ${round}\nPlayer: ${playerWinCount}\nComputer: ${computerWinCount}\nTied games: ${tie}`);
     
+    // Generate report for current round.
+    const roundResultsTitle = document.createElement('p');
+    roundResultsTitle.classList.add('roundResultsTitle');
+    roundResultsTitle.style.textAlign = 'center';
+    roundResultsTitle.textContent = `Report for Round ${round}`;
     
+    const winner = document.createElement('p');
+    winner.classList.add('winner');
+    winner.style.fontWeight = "bold";
+
+    if(results == "player") {
+        winner.textContent = "Player Wins!";
+    } else if (results == "computer") {
+        winner.textContent = "Computer Wins!  Good luck next time.";
+    } else if (results == "tie") {
+        winner.textContent= "Tie game!";
+    }
+    
+    const numPlayerWins = document.createElement('p');
+    numPlayerWins.classList.add('numPlayerWins');
+    numPlayerWins.textContent = `Player has ${playerWinCount} wins.`;
+
+    const numComputerWins = document.createElement('p');
+    numComputerWins.classList.add('numComputerWins');
+    numComputerWins.textContent = `Computer has ${computerWinCount} wins`;
+
+
+    gameResultsContainer.appendChild(roundResultsTitle);
+    gameResultsContainer.appendChild(winner);
+    gameResultsContainer.appendChild(numPlayerWins);
+    gameResultsContainer.appendChild(numComputerWins);
+
+    gameResultsContainer.appendChild(document.createElement('hr'));
+
     // Increment for reporting purposes.
     round++;
+
+    /**************************************************************************
+     * No longer need this for now.
+     **************************************************************************/
     // Number of rounds for this game.
     //let rounds = 5;
 
@@ -180,7 +234,7 @@ gameResultsContainer.appendChild(runningScore);
 // Create border below description text.
 gameResultsContainer.appendChild(document.createElement('hr'));
 
-
+// Event listener for clicks.
 buttons.addEventListener('click', (event) => {
     const isButton = event.target.nodeName === 'BUTTON';
     if(!isButton) {
@@ -189,15 +243,29 @@ buttons.addEventListener('click', (event) => {
 
     const playerSelection = event.target.id;
 
+    // Begin setup of final winner message.
+    const finalWinner = document.createElement('h2');
+    finalWinner.classList.add('finalWinner');
+    finalWinner.style.textAlign = 'center';
+
     // Play until a player get 5 wins
     if(playerWinCount < 5 && computerWinCount < 5) {
         game(playerSelection);
     } else if (playerWinCount == 5) {
-        alert("Player wins");
+        finalWinner.textContent = "Player wins the game!";
+        isGameFinished = true;
     } else if (computerWinCount == 5) {
-        alert("Computer wins");
+        finalWinner.textContent = "Computer wins the game!";
+        isGameFinished = true;
     } else {
         alert("Refresh to start new game");
     }
     
+    // Reveal final winner.
+    if(isGameFinished) {
+        gameResultsContainer.appendChild(finalWinner);
+        const rockButton = document.querySelector('#rock').disabled = true;
+        const paperButton = document.querySelector('#paper').disabled = true;
+        const scissorsButton = document.querySelector('#scissors').disabled = true;
+    }
 });
